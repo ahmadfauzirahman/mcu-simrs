@@ -4,8 +4,11 @@ use app\components\Helper;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\web\JsExpression;
+use yii\web\View;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Pasien */
@@ -18,7 +21,6 @@ $this->title = 'Data Pasien - ' . $model->nama;
         position: fixed;
         bottom: 90px;
         right: 40px;
-        background-color: #25d366;
         color: #FFF;
         text-align: center;
         box-shadow: 2.5px 2.5px 5px #999;
@@ -29,7 +31,6 @@ $this->title = 'Data Pasien - ' . $model->nama;
         position: fixed;
         bottom: 40px;
         right: 40px;
-        background-color: #25d366;
         color: #FFF;
         text-align: center;
         box-shadow: 2.5px 2.5px 5px #999;
@@ -39,7 +40,7 @@ $this->title = 'Data Pasien - ' . $model->nama;
 
 <style>
     #form-pasien .col-form-label {
-        font-size: small;
+        font-size: 11px;
     }
 
     #form-pasien .form-group {
@@ -50,7 +51,7 @@ $this->title = 'Data Pasien - ' . $model->nama;
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="card card-indigo card-outline">
                 <div class="card-header">
                     <h5 class="card-title">
@@ -175,14 +176,14 @@ $this->title = 'Data Pasien - ' . $model->nama;
 
                             <div style="z-index: 999999;" class="float-group btn-group-vertical" role="group" aria-label="Vertical button group">
 
-                                <?= Html::submitButton('Simpan Data Pasien', ['class' => 'btn btn-success']) ?>
+                                <?= Html::submitButton('Simpan Data Pasien', ['class' => 'btn btn-success', 'style' => 'border-radius:10px']) ?>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="card card-indigo card-outline">
+            <div class="card card-danger card-outline">
                 <div class="card-header">
                     <h5 class="card-title">
                         <i class="fas fa-lungs-virus"></i> &nbsp;
@@ -199,8 +200,131 @@ $this->title = 'Data Pasien - ' . $model->nama;
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card card-indigo card-outline">
+        <div class="col-md-7">
+            <div class="card card-success card-outline">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-list-alt"></i> &nbsp;
+                        Data Pelayanan MCU
+                    </h5>
+                </div>
+                <div class="table-responsive">
+                    <div class="card-body">
+
+                        <?php Pjax::begin(); ?>
+                        <?php // echo $this->render('_search', ['model' => $searchModel]); 
+                        ?>
+
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'tableOptions' => [
+                                'class' => 'table table-sm table-bordered table-hover table-list-item'
+                            ],
+                            'columns' => [
+                                [
+                                    'headerOptions' => ['style' => 'padding-left:10px;padding-right:10px;'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+
+                                    'class' => 'yii\grid\SerialColumn'
+                                ],
+
+                                // 'id_data_pelayanan',
+                                [
+                                    'attribute' => 'no_rekam_medik',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center']
+                                ],
+                                [
+                                    'attribute' => 'nama',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center']
+                                ],
+                                [
+                                    'attribute' => 'no_registrasi',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center']
+                                ],
+                                // 'no_mcu',
+                                // 'tempat',                            //'tgl_lahir',
+                                //'agama',
+                                //'kedudukan_dalam_keluarga',
+                                //'status_perkawinan',
+                                //'pendidikan',
+                                //'pekerjaan',
+                                //'alamat:ntext',
+                                //'wni',
+                                [
+                                    'attribute' => 'tanggal_pemeriksaan',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return Helper::tanggal_indonesia(date('Y-m-d', strtotime($model->tanggal_pemeriksaan)));
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'kode_debitur',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center']
+                                ],
+                                [
+                                    'attribute' => 'kode_paket',
+                                    'headerOptions' => ['style' => 'text-align:center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->paket->nama;
+                                    }
+                                ],
+                                // //'pas_foto_offline:ntext',
+                                // //'pas_foto_online_valid',
+                                // 'kode_debitur',
+                                // 'kode_paket',
+                                // //'jenis_kelamin',
+                                // //'no_ujian',
+
+                                // ['class' => 'app\components\ActionColumn'],
+
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Lakukan Pemeriksaan',
+                                    'headerOptions' => ['style' => 'color:#337ab7;text-align:center;width:40px'],
+                                    'template' => '{periksa}',
+                                    'buttons' => [
+                                        'periksa' => function ($url, $model) {
+                                            return Html::a(
+                                                '<span class="fas fa-directions"></span>',
+                                                ['/pasien-baru/lakukan-pelayanan', 'id' => $model->no_rekam_medik, 'no_register' => $model->no_registrasi, 'paket' => $model->kode_paket],
+                                                [
+                                                    'title' => Yii::t('app', 'lihat'),
+                                                    'class' => 'btn bg-danger btn-sm',
+                                                    'data-pjax' => "0",
+                                                    'method' => 'post',
+                                                    'target' => '_blank',
+                                                    'style' => 'border-radius:8px'
+                                                    // 'data-key' => $model->id_layanan,
+                                                    // 'data-target' => "#myModal",
+                                                    // 'data-toggle' => "modal",
+                                                    // 'data-title' => "Pemeriksaan Okupasi"
+                                                ]
+                                            );
+                                        },
+                                    ],
+                                ],
+                            ],
+                            'summaryOptions' => ['class' => 'summary mb-2'],
+                            'pager' => [
+                                'class' => 'yii\bootstrap4\LinkPager',
+                            ]
+                        ]); ?>
+
+                        <?php Pjax::end(); ?>
+
+                        <!--.card-body-->
+                    </div>
+                </div>
+                <!--.card-->
+            </div>
+            <div class="card card-orange card-outline">
                 <div class="card-header">
                     <h5 class="card-title">
                         <i class="fas fa-map"></i> &nbsp;
@@ -215,19 +339,19 @@ $this->title = 'Data Pasien - ' . $model->nama;
                     <?= $form->field($model, 'alamat')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Alamat']) ?>
                     <?= $form->field($model, 'kelurahan_kode')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Kelurahan']) ?>
                     <?=
-                        $form->field($model, 'suku_kode')->widget(Select2::classname(), [
-                            'data' => ArrayHelper::map(Helper::DataSuku(), 'kode', 'nama'),
-                            'options' => [
-                                'placeholder' => 'Pilih Suku Bangsa',
-                                'class' => 'form-control form-control-sm'
-                            ],
-                            'theme' => Select2::THEME_DEFAULT,
-                            'pluginOptions' => [
-                                'allowClear' => true
-                            ],
-                        ]);
+                    $form->field($model, 'suku_kode')->widget(Select2::classname(), [
+                        'data' => ArrayHelper::map(Helper::DataSuku(), 'kode', 'nama'),
+                        'options' => [
+                            'placeholder' => 'Pilih Suku Bangsa',
+                            'class' => 'form-control form-control-sm'
+                        ],
+                        'theme' => Select2::THEME_DEFAULT,
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]);
 
-                        ?>
+                    ?>
 
                     <?= $form->field($model, 'rt')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'RT']) ?>
 
@@ -237,60 +361,67 @@ $this->title = 'Data Pasien - ' . $model->nama;
 
                 </div>
             </div>
-            <div class="card card-indigo card-outline">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <i class="fas fa-map"></i> &nbsp;
-                        Biodata Pasangan
-                    </h5>
-                </div>
-                <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-pink card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <i class="fas fa-users"></i> &nbsp;
+                                Biodata Pasangan
+                            </h5>
+                        </div>
+                        <div class="card-body">
 
-                    <?= $form->field($model, 'anak_ke')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Anak Ke']) ?>
-                    <?= $form->field($model, 'istri_ke')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Istri Ke']) ?>
-                    <?= $form->field($model, 'status_kawin_kode')->dropdownList(Helper::StatusNikah(), ['maxlength' => true, 'class' => 'form-control form-control-sm', 'prompt' => 'Status Kawin']) ?>
-                    <?= $form->field($model, 'jml_anak')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Jumlah Anak']) ?>
-                    <?= $form->field($model, 'nama_pasangan')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Pasangan']) ?>
+                            <?= $form->field($model, 'anak_ke')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Anak Ke']) ?>
+                            <?= $form->field($model, 'istri_ke')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Istri Ke']) ?>
+                            <?= $form->field($model, 'status_kawin_kode')->dropdownList(Helper::StatusNikah(), ['maxlength' => true, 'class' => 'form-control form-control-sm', 'prompt' => 'Status Kawin']) ?>
+                            <?= $form->field($model, 'jml_anak')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'Jumlah Anak']) ?>
+                            <?= $form->field($model, 'nama_pasangan')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Pasangan']) ?>
 
-                </div>
-            </div>
-            <div class="card card-indigo card-outline">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <i class="fas fa-user-friends"></i> &nbsp;
-                        Data Orang Tua
+                        </div>
+                    </div>
+                    <div class="card card-indigo card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <i class="fas fa-user-md"></i> &nbsp;
+                                Pekerjaan
+                            </h5>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?= $form->field($model, 'tempat_kerja')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Tempat Kerja']) ?>
+                            <?= $form->field($model, 'alamat_tempat_kerja')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Alamat Tempat Bekerja']) ?>
 
-                    </h5>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                        </button>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <?= $form->field($model, 'ayah_no_rekam_medis')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'No Rekam Medis Ayah']) ?>
-                    <?= $form->field($model, 'ibu_no_rekam_medis')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'No Rekam Medis Ibu']) ?>
-                    <?= $form->field($model, 'ayah_nama')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Ayah']) ?>
-                    <?= $form->field($model, 'ibu_nama')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Ibu']) ?>
+                <div class="col-md-6">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                <i class="fas fa-user-friends"></i> &nbsp;
+                                Data Orang Tua
 
-                </div>
-            </div>
-            <div class="card card-indigo card-outline collapsed-card">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <i class="fas fa-user-md"></i> &nbsp;
-                        Pekerjaan
-                    </h5>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                        </button>
+                            </h5>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?= $form->field($model, 'ayah_no_rekam_medis')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'No Rekam Medis Ayah']) ?>
+                            <?= $form->field($model, 'ibu_no_rekam_medis')->textInput(['class' => 'form-control form-control-sm', 'placeholder' => 'No Rekam Medis Ibu']) ?>
+                            <?= $form->field($model, 'ayah_nama')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Ayah']) ?>
+                            <?= $form->field($model, 'ibu_nama')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Nama Ibu']) ?>
+
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <?= $form->field($model, 'tempat_kerja')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Tempat Kerja']) ?>
-                    <?= $form->field($model, 'alamat_tempat_kerja')->textInput(['maxlength' => true, 'class' => 'form-control form-control-sm', 'placeholder' => 'Alamat Tempat Bekerja']) ?>
-
-                </div>
             </div>
+
 
         </div>
 
@@ -298,3 +429,5 @@ $this->title = 'Data Pasien - ' . $model->nama;
 
 </div>
 <?php ActiveForm::end(); ?>
+
+<?php $this->registerJs($this->render('_pasien-baru.js'), View::POS_END)  ?>

@@ -68,7 +68,7 @@ class DataPelayanan extends \yii\db\ActiveRecord
     {
         return [
             'id_data_pelayanan' => 'Id Data Pelayanan',
-            'no_rekam_medik' => 'No Rekam Medik',
+            'no_rekam_medik' => 'No RM',
             'no_mcu' => 'No Mcu',
             'nama' => 'Nama',
             'tempat' => 'Tempat',
@@ -89,5 +89,10 @@ class DataPelayanan extends \yii\db\ActiveRecord
             'jenis_kelamin' => 'Jenis Kelamin',
             'no_ujian' => 'No Ujian',
         ];
+    }
+
+    public function getPaket()
+    {
+        return  $this->hasOne(PaketMcu::className(), ['kode' => 'kode_paket']);
     }
 }

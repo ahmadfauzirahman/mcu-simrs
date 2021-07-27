@@ -2,11 +2,11 @@
 
 use yii\helpers\Url;
 ?>
-<aside class="main-sidebar sidebar-light-indigo elevation-4">
+<aside class="main-sidebar sidebar-light-green elevation-3">
     <!-- Brand Logo -->
-    <a href="<?= Url::to(['site/index']) ?>" class="brand-link">
+    <a href="<?= Url::to(['site/index']) ?>" class="brand-link navbar-green">
         <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light" style="font-size: 20px;font-family: 'Satisfy', cursive;">&nbsp;&nbsp;&nbsp; <b>E - MCU AA</b></span>
+        <span class="brand-text font-weight-light text-white" style="font-size: 20px;font-family: 'Satisfy', cursive;font-weight: 200;">&nbsp;&nbsp;&nbsp; <b>E - MCU AA</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -38,6 +38,8 @@ use yii\helpers\Url;
         <nav class="mt-2">
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
+
+                'options' => [ 'class' => 'nav nav-pills nav-sidebar text-sm flex-column  nav-compact',],
                 'items' => [
                     // [
                     //     'label' => 'Starter Pages',
@@ -50,17 +52,20 @@ use yii\helpers\Url;
                     // ],
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['site/index']],
                     ['label' => 'Data Pemeriksaan', 'header' => true],
-                    in_array($this->context->action->id, ["periksa", 'index-pasien']) ? ['label' => 'Pasien - ' . $this->params['kode'],  'icon' => 'stream', 'url' => ['/pasien-baru/periksa', 'id' => $this->params['kode']]] :  ['label' => 'Pasien', 'url' => ['/pasien-baru/periksa'], 'icon' => 'users'],
-                    in_array($this->context->action->id, ["periksa", 'index-pasien']) ? ['label' => 'Data Pelayanan - ' . $this->params['kode'],  'icon' => 'stream', 'url' => ['/data-pelayanan/index-pasien', 'kode' => $this->params['kode']]] : ['label' => 'Data Pelayanan',  'icon' => 'stream', 'url' => ['/data-pelayanan/index']],
+                    ['label' => 'Pasien', 'url' => ['/pasien-baru/periksa'], 'icon' => 'users'],
                     ['label' => 'Pemeriksaan', 'header' => true],
-                    in_array($this->context->action->id, ["periksa", 'index-pasien']) ? ['label' => 'Hasil Lab - ' . $this->params['kode'],  'icon' => 'vials', 'url' => ['/hasil-lab/index-pasien', 'kode' => $this->params['kode']]] : ['label' => 'Hasil Lab',  'icon' => 'vials', 'url' => ['/hasil-lab/index']],
-                    in_array($this->context->action->id, ["periksa", 'index-pasien']) ? ['label' => 'Hasil Radiologi - ' . $this->params['kode'],  'icon' => 'x-ray', 'url' => ['/hasil-radiologi/index-pasien', 'kode' => $this->params['kode']]] : ['label' => 'Hasil Radiologi',  'icon' => 'x-ray', 'url' => ['/hasil-radiologi/index']],
+                    ['label' => 'Hasil Lab',  'icon' => 'vials', 'url' => ['/hasil-lab/index']],
+                    ['label' => 'Hasil Radiologi',  'icon' => 'x-ray', 'url' => ['/hasil-radiologi/index']],
 
 
                     ['label' => 'Laporan', 'header' => true],
                     ['label' => 'Cetak Tindakan Saya', 'icon' => 'bars',],
                     ['label' => 'Cetak PKTK', 'icon' => 'file-medical-alt'],
                     ['label' => 'Cetak Sertifikat', 'icon' => 'file-medical-alt',],
+                    ['label' => 'Master Medical Check Up', 'header' => true],
+                    ['label' => 'Paket', 'icon' => 'bars', 'url' => ['/paket-mcu/index']],
+
+
                 ],
             ]);
             ?>

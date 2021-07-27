@@ -51,7 +51,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
     <?php $this->head() ?>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm">
+<body class="hold-transition sidebar-mini layout-fixed  layout-navbar-fixed text-sm">
     <?php $this->beginBody() ?>
 
     <div class="wrapper">

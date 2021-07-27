@@ -87,7 +87,9 @@ class DataPelayananSearch extends DataPelayanan
 
     public function searchPasien($params, $kode)
     {
-        $query = DataPelayanan::find()->where(['no_rekam_medik' => $kode]);
+        $query = DataPelayanan::find()
+        ->joinWith(['paket'])
+        ->where(['no_rekam_medik' => $kode]);
 
         // add conditions that should always apply here
 
@@ -108,9 +110,11 @@ class DataPelayananSearch extends DataPelayanan
             'tgl_lahir' => $this->tgl_lahir,
             'tanggal_pemeriksaan' => $this->tanggal_pemeriksaan,
             'pas_foto_online_valid' => $this->pas_foto_online_valid,
-            'kode_paket' => $this->kode_paket,
         ]);
 
+        $query->andFilterWhere([
+            'paket.kode' => $this->kode_paket,
+        ]);
         $query->andFilterWhere(['ilike', 'id_data_pelayanan', $this->id_data_pelayanan])
             ->andFilterWhere(['ilike', 'no_rekam_medik', $this->no_rekam_medik])
             ->andFilterWhere(['ilike', 'no_mcu', $this->no_mcu])
