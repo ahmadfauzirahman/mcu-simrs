@@ -65,6 +65,12 @@ $helper = [
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-12">
+                    <div style="text-align: center;">
+                        <h3 style="font-weight: bold; margin-bottom: 0px;">Unit Medical Check Up</h3>
+                        <h3 style="font-weight: bold; margin-top: 0px;"><?= Html::encode($this->title) ?></h3>
+                    </div>
+
+                    <hr>
                     <div class="card-box">
                         <div class="form-group">
                             <h4 class="header-title m-t-0 m-b-30">1. Tanda Vital</h4>
