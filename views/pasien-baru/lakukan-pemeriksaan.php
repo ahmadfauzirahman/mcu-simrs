@@ -49,10 +49,10 @@ $helper = [
         </div>
     </div>
 
-    <div class="card card-success">
+    <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">
-                <i class="fas fa-skull"></i> &nbsp;
+                <i class="fas fa-list"></i> &nbsp;
                 Pemeriksaa Fisik
             </h3>
 
@@ -2066,5 +2066,45 @@ $helper = [
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list"></i> &nbsp;
+                        Diagnosis ICD 10 & Diagnosis Kerja
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-orange">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list"></i> &nbsp;
+                        Hasil Resume Tidak Normal
+                    </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <?php ActiveForm::end(); ?>

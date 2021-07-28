@@ -86,6 +86,8 @@ $config = [
         'api' => [
             'class' => 'app\modules\api\Module',
         ],
+        'redactor' => 'yii\redactor\RedactorModule',
+
     ],
     'container' => [
         'definitions' => [

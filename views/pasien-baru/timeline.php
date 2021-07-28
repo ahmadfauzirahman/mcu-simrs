@@ -39,6 +39,16 @@ $width = 20;
 <div class="data-pribadi-create">
 
     <div class="progress">
+    <a href="<?= Url::to(
+                        [
+                            '/anamnesa/lakukan-pelayanan-anamnesa',
+                            'id' => $id,
+                            'no_register' => $no_register,
+                            'paket' => $paket
+                        ],
+                    ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
+            ANAMNESA </span>
+        </a>
         <a href="<?= Url::to(
                         [
                             '/pasien-baru/lakukan-pelayanan',
@@ -99,7 +109,7 @@ $width = 20;
                     ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
             TREADMILL </span>
         </a>
-     
+
 
     </div>
 

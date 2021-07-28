@@ -17,7 +17,7 @@ use yii\helpers\Url;
                 <img src="<?= $assetDir ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">Alexander Pierce <br> <b>Admin</b></a>
             </div>
         </div>
 
@@ -39,7 +39,7 @@ use yii\helpers\Url;
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
 
-                'options' => [ 'class' => 'nav nav-pills nav-sidebar text-sm flex-column  nav-compact',],
+                'options' => ['class' => 'nav nav-pills nav-sidebar text-sm flex-column  nav-compact',],
                 'items' => [
                     // [
                     //     'label' => 'Starter Pages',
@@ -64,6 +64,7 @@ use yii\helpers\Url;
                     ['label' => 'Cetak Sertifikat', 'icon' => 'file-medical-alt',],
                     ['label' => 'Master Medical Check Up', 'header' => true],
                     ['label' => 'Paket', 'icon' => 'bars', 'url' => ['/paket-mcu/index']],
+                    ['label' => 'Anamnesa', 'icon' => 'bars', 'url' => ['/anamnesa/index']],
 
 
                 ],
