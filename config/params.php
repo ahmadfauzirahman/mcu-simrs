@@ -15,7 +15,7 @@ return [
                 'js' => 'overlayScrollbars/js/jquery.overlayScrollbars.min.js',
             ],
             'pace' => [
-                'css' => 'pace-progress/themes/pink/pace-theme-corner-indicator.css',
+                'css' => 'pace-progress/themes/green/pace-theme-corner-indicator.css',
                 // 'css' => 'pace-progress/themes/pink/pace-theme-center-simple.css',
                 'js' => 'pace-progress/pace.min.js'
             ],

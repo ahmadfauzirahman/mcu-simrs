@@ -15,14 +15,14 @@ $width = 20;
         background-color: #ffc04a;
         font-weight: bolder;
         font-size: x-small;
-        border-radius: 3px;
+        border-radius: 1px;
     }
 
     .progress .inactive {
         background-color: #ffc04a;
         font-weight: bolder;
         font-size: x-small;
-        border-radius: 3px;
+        border-radius: 1px;
 
     }
 
@@ -69,24 +69,37 @@ $width = 20;
                     ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
             MATA </span>
         </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
+        <a href="<?= Url::to(
+                        [
+                            '/pasien-baru/lakukan-pelayanan-gigi',
+                            'id' => $id,
+                            'no_register' => $no_register,
+                            'paket' => $paket
+                        ],
+                    ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
             GIGI </span>
         </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
+        <a href="<?= Url::to(
+                        [
+                            '/pasien-baru/lakukan-pelayanan-ekg',
+                            'id' => $id,
+                            'no_register' => $no_register,
+                            'paket' => $paket
+                        ],
+                    ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
             EKG </span>
         </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
-            P2KB </span>
+        <a href="<?= Url::to(
+                        [
+                            '/pasien-baru/lakukan-pelayanan-treadmill',
+                            'id' => $id,
+                            'no_register' => $no_register,
+                            'paket' => $paket
+                        ],
+                    ) ?>" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
+            TREADMILL </span>
         </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
-            P2KB </span>
-        </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
-            P2KB </span>
-        </a>
-        <a href="#" class="inactive progress-bar progress-bar-warning  progress-daftar" style="width: <?php echo $width; ?>%" title="Belum">
-            P2KB </span>
-        </a>
+     
 
     </div>
 

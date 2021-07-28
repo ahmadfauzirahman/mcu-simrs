@@ -9,6 +9,15 @@ use yii\helpers\Html;
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 $this->registerCssFile('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
+\hail812\adminlte3\assets\PluginAsset::register($this)->add([
+    'chart.js',
+    'icheck-bootstrap',
+    'pace',
+    'popper',
+    'overlayScrollbars',
+    'sweetalert2',
+    'toastr',
+]);
 
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 ?>

@@ -20,7 +20,7 @@ class PaketMcu extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'master.paket';
+        return 'mcu.paket';
     }
 
     /**

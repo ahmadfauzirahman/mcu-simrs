@@ -272,7 +272,12 @@ $this->title = 'Data Pasien - ' . $model->nama;
                                     'headerOptions' => ['style' => 'text-align:center'],
                                     'contentOptions' => ['style' => 'text-align:center'],
                                     'value' => function ($model) {
-                                        return $model->paket->nama;
+                                        if(is_null($model->paket)){
+                                            return '-';
+                                        }else{
+                                            return $model->paket->nama;
+
+                                        }
                                     }
                                 ],
                                 // //'pas_foto_offline:ntext',

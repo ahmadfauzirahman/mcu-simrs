@@ -11,8 +11,11 @@ use app\models\PasienBaruSearch;
 use app\models\PemeriksaanFisik;
 use app\models\spesialis\McuPenatalaksanaanMcu;
 use app\models\spesialis\McuSpesialisAudiometri;
+use app\models\spesialis\McuSpesialisEkg;
+use app\models\spesialis\McuSpesialisGigi;
 use app\models\spesialis\McuSpesialisMata;
 use app\models\spesialis\McuSpesialisTht;
+use app\models\spesialis\McuSpesialisTreadmill;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -230,7 +233,90 @@ class PasienBaruController extends Controller
 
     public function actionLakukanPelayananGigi($id, $no_register, $paket)
     {
-        return $this->render('lakukan-pelayanan-gigi');
+
+        $pasien = PasienBaru::findOne(['kode' => $id]);
+        $paketTindakan = PaketMcu::findOne(['kode' => $paket]);
+        $modelPenata = new McuPenatalaksanaanMcu();
+        $model = McuSpesialisGigi::find()
+            ->where(['no_rekam_medik' => $id])
+            ->andWhere(['no_daftar' => $no_register])
+            ->one();
+
+        if (is_null($model)) {
+            $model = new McuSpesialisGigi();
+            // $modelAudiometri = new McuSpesialisAudiometri();
+        } else {
+            // $modelPenataList = McuPenatalaksanaanMcu::find()
+            // ->where(['jenis' => 'spesialis_tht_berbisik'])
+            // ->andWhere(['id_fk' => $model->id_spesialis_tht_berbisik]);
+        }
+        return $this->render('lakukan-pelayanan-gigi', [
+            'paket' => $paket,
+            'id' => $id,
+            'no_register' => $no_register,
+            'pasien' => $pasien,
+            'paketTindakan' => $paketTindakan,
+            'model' => $model,
+            'modelPenata' => $modelPenata,
+        ]);
+    }
+    public function actionLakukanPelayananEkg($id, $no_register, $paket)
+    {
+
+        $pasien = PasienBaru::findOne(['kode' => $id]);
+        $paketTindakan = PaketMcu::findOne(['kode' => $paket]);
+        $modelPenata = new McuPenatalaksanaanMcu();
+        $model = McuSpesialisEkg::find()
+            ->where(['no_rekam_medik' => $id])
+            ->andWhere(['no_daftar' => $no_register])
+            ->one();
+
+        if (is_null($model)) {
+            $model = new McuSpesialisEkg();
+            // $modelAudiometri = new McuSpesialisAudiometri();
+        } else {
+            // $modelPenataList = McuPenatalaksanaanMcu::find()
+            // ->where(['jenis' => 'spesialis_tht_berbisik'])
+            // ->andWhere(['id_fk' => $model->id_spesialis_tht_berbisik]);
+        }
+        return $this->render('lakukan-pelayanan-ekg', [
+            'paket' => $paket,
+            'id' => $id,
+            'no_register' => $no_register,
+            'pasien' => $pasien,
+            'paketTindakan' => $paketTindakan,
+            'model' => $model,
+            'modelPenata' => $modelPenata,
+        ]);
+    }
+
+    public function actionLakukanPelayananTreadmill($id, $no_register, $paket)
+    {
+        $pasien = PasienBaru::findOne(['kode' => $id]);
+        $paketTindakan = PaketMcu::findOne(['kode' => $paket]);
+        $modelPenata = new McuPenatalaksanaanMcu();
+        $model = McuSpesialisTreadmill::find()
+            ->where(['no_rekam_medik' => $id])
+            ->andWhere(['no_daftar' => $no_register])
+            ->one();
+
+        if (is_null($model)) {
+            $model = new McuSpesialisTreadmill();
+            // $modelAudiometri = new McuSpesialisAudiometri();
+        } else {
+            // $modelPenataList = McuPenatalaksanaanMcu::find()
+            // ->where(['jenis' => 'spesialis_tht_berbisik'])
+            // ->andWhere(['id_fk' => $model->id_spesialis_tht_berbisik]);
+        }
+        return $this->render('lakukan-pelayanan-treadmill', [
+            'paket' => $paket,
+            'id' => $id,
+            'no_register' => $no_register,
+            'pasien' => $pasien,
+            'paketTindakan' => $paketTindakan,
+            'model' => $model,
+            'modelPenata' => $modelPenata,
+        ]);
     }
 
     /**
