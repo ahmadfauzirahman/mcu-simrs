@@ -31,7 +31,7 @@ return [
                 'js' => ['toastr/toastr.min.js']
             ],
             'chart.js' => [
-                'css' => 'chart.js/Chart.min.css',
+                'css'=> 'chart.js/Chart.min.css',
                 'js' => 'chart.js/Chart.min.js'
             ]
         ]

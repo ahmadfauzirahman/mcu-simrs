@@ -53,6 +53,15 @@ use yii\helpers\Url;
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['site/index']],
                     ['label' => 'Data Pemeriksaan', 'header' => true],
                     ['label' => 'Pasien', 'url' => ['/pasien-baru/periksa'], 'icon' => 'users'],
+
+                    ['label' => 'Okupasi', 'header' => true],
+                    ['label' => 'Lembar Konsultasi', 'url' => ['/lembar-konsultasi/index'], 'icon' => 'hand-holding-medical'],
+                    ['label' => 'Jawaban Konsultasi', 'url' => ['/jawaban-konsultasi/index'], 'icon' => 'hand-holding-medical'],
+                    ['label' => 'Pertimbangan Medis', 'url' => ['/jawaban-konsultasi/index'], 'icon' => 'hand-holding-medical'],
+                    ['label' => 'Surat Sakit', 'url' => ['/jawaban-konsultasi/index'], 'icon' => 'hand-holding-medical'],
+                    ['label' => 'Form Rujukan/Jadwal Kontrol', 'url' => ['/jawaban-konsultasi/index'], 'icon' => 'hand-holding-medical'],
+
+
                     ['label' => 'Pemeriksaan', 'header' => true],
                     ['label' => 'Hasil Lab',  'icon' => 'vials', 'url' => ['/hasil-lab/index']],
                     ['label' => 'Hasil Radiologi',  'icon' => 'x-ray', 'url' => ['/hasil-radiologi/index']],
@@ -60,8 +69,10 @@ use yii\helpers\Url;
 
                     ['label' => 'Laporan', 'header' => true],
                     ['label' => 'Cetak Tindakan Saya', 'icon' => 'bars',],
-                    ['label' => 'Cetak PKTK', 'icon' => 'file-medical-alt'],
-                    ['label' => 'Cetak Sertifikat', 'icon' => 'file-medical-alt',],
+                    ['label' => 'Cetak Lembar Konsultasi', 'icon' => 'bars',],
+                    ['label' => 'Cetak Jawaban Konsultasi', 'icon' => 'bars',],
+                    ['label' => 'Cetak PKTK', 'icon' => 'file'],
+                    ['label' => 'Cetak Sertifikat', 'icon' => 'file',],
                     ['label' => 'Master Medical Check Up', 'header' => true],
                     ['label' => 'Paket', 'icon' => 'bars', 'url' => ['/paket-mcu/index']],
                     ['label' => 'Anamnesa', 'icon' => 'bars', 'url' => ['/anamnesa/index']],
