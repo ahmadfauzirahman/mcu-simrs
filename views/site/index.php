@@ -70,7 +70,20 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 <!-- /.card-body -->
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="row">
+                <?php foreach ($totalPasienSemua as $item) { ?>
+                    <div class="col-lg-4" style="margin-bottom: 10px;">
+                        <a data-rel="tooltip" data-title="Jumlah Semua Pasien" href="" class="btn btn-success btn-block">
+                            <span style="margin-left: 15px; font-size: 35px;"><?= $item['kode_debitur'] ?></span>
+                            <span style="margin-left: 15px; font-size: 35px;"><?= $item['jumlah'] ?></span>
+                        </a>
+                        
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
 </div>
 
-<?php $this->registerJs($this->render('index.js'),View::POS_END) ?>
+<?php $this->registerJs($this->render('index.js'), View::POS_END) ?>

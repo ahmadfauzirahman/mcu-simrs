@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\DataPelayanan;
 
 class SiteController extends Controller
 {
@@ -61,7 +62,30 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        // $acakKelompok =rand(1,5);
+        // var_dump($acakKelompok);
+        // exit;
+        $totalPasienSemua = DataPelayanan::find()->select(
+            [
+                'count(kode_debitur) as jumlah',
+                'kode_debitur'
+            ]
+        )
+            ->where(['not', ['kode_debitur' => null]])
+            ->groupBy('kode_debitur')
+            ->asArray()
+            ->all();
+        // echo '<pre>';
+        // var_dump($totalPasienSemua);
+        // exit();
+        // $totalPasienKe
+        return $this->render(
+            'index',
+            [
+                'totalPasienSemua' => $totalPasienSemua
+            ]
+        );
     }
 
     /**

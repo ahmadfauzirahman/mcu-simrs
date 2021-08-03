@@ -73,6 +73,8 @@ use yii\helpers\Url;
                     ['label' => 'Cetak Jawaban Konsultasi', 'icon' => 'bars',],
                     ['label' => 'Cetak PKTK', 'icon' => 'file'],
                     ['label' => 'Cetak Sertifikat', 'icon' => 'file',],
+                    ['label' => 'Cetak Remon', 'icon' => 'file',],
+
                     ['label' => 'Master Medical Check Up', 'header' => true],
                     ['label' => 'Paket', 'icon' => 'bars', 'url' => ['/paket-mcu/index']],
                     ['label' => 'Anamnesa', 'icon' => 'bars', 'url' => ['/anamnesa/index']],
